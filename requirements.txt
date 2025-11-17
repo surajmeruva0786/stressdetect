@@ -1,0 +1,7 @@
+opencv-python
+numpy
+mediapipe
+librosa
+soundfile
+tqdm
+moviepy

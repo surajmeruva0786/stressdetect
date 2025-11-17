@@ -1,0 +1,7 @@
+# Ignore everything
+*
+# But not these files
+!organize_videos.py
+!preprocess_data.py
+!train_baseline_model.py
+!.gitignore

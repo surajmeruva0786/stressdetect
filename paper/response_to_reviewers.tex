@@ -1,0 +1,878 @@
+%==============================================================
+%  Response to Reviewers' Comments
+%  Manuscript ID 88 -- FMLDS2026
+%  Page layout and prose follow The Chicago Manual of Style, 17th ed.
+%  (manuscript style: 12 pt serif, 1 in margins, double-spaced
+%   body text, single-spaced block quotations).
+%
+%  References use the IEEE numbered style, to match the reference
+%  list of the manuscript itself.  Entries that also appear in the
+%  manuscript are reproduced from its bibliography verbatim.
+%
+%  NOTE: All descriptions of changes made to the manuscript are
+%  typeset in RED, via the \begin{changesblock} ... \end{changesblock}
+%  environment defined below.
+%==============================================================
+
+\documentclass[12pt,letterpaper]{article}
+
+% ---------- Page layout (Chicago: 1-inch margins all round) ----------
+\usepackage[margin=1in]{geometry}
+
+% ---------- Fonts (Chicago: a readable serif, Times New Roman) -------
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% ---------- Spacing (Chicago manuscript style: double-spaced) --------
+\usepackage{setspace}
+\doublespacing
+% To produce a shorter document, replace \doublespacing above with
+% \onehalfspacing.  Nothing else needs to change.
+
+% ---------- Utility packages ----------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+% ---------- The colour used to mark changes --------------------------
+% Defined once here so it can be changed globally in a single place.
+\definecolor{changered}{rgb}{0.80,0.00,0.00}
+
+% ---------- Running head (Chicago: author surname + page no.) --------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\rhead{\small Meruva et al.\ \thepage}
+
+% ---------- Sectional headings (Chicago levels 1 and 2) --------------
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries\centering}{}{0pt}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{1.5\baselineskip}{0.5\baselineskip}
+\titlespacing*{\subsection}{0pt}{1\baselineskip}{0.25\baselineskip}
+
+% ---------- Environment for verbatim reviewer comments ---------------
+% Chicago: block quotations are single-spaced, indented, and set
+% without quotation marks.
+\newenvironment{reviewercomment}
+  {\begin{singlespace}%
+   \begin{quote}\itshape\noindent}
+  {\end{quote}%
+   \end{singlespace}\vspace{-0.25\baselineskip}}
+
+% ---------- Environment for changes made (typeset in red) ------------
+% An environment (rather than a command) is used so that the colour
+% change is confined to its own group and cannot bleed into the text
+% that follows.
+\newenvironment{changesblock}
+  {\par\vspace{0.3\baselineskip}%
+   \color{changered}\noindent
+   \textbf{Changes to the manuscript.}\enspace\ignorespaces}
+  {\par\vspace{0.3\baselineskip}}
+
+% ---------- Label for each numbered reviewer point -------------------
+\newcommand{\point}[1]{%
+  \par\normalcolor\vspace{0.4\baselineskip}%
+  \noindent\textbf{#1}\par\nopagebreak}
+\newcommand{\response}{\noindent{\color{changered}\textbf{Response.}}\enspace}
+
+% ---------- IEEE-style numbered reference list -----------------------
+% Matches the numbered "[n]" bibliography style of the manuscript.
+\newenvironment{ieeerefs}
+  {\begin{singlespace}%
+   \begin{list}{[\arabic{enumi}]}{%
+     \usecounter{enumi}%
+     \setlength{\labelwidth}{2em}%
+     \setlength{\labelsep}{0.5em}%
+     \setlength{\leftmargin}{2.5em}%
+     \setlength{\itemindent}{0pt}%
+     \setlength{\listparindent}{0pt}%
+     \setlength{\topsep}{0.5\baselineskip}%
+     \setlength{\itemsep}{0.5\baselineskip}%
+     \setlength{\parsep}{0pt}}}
+  {\end{list}\end{singlespace}}
+
+\begin{document}
+
+%==============================================================
+%  Heading
+%==============================================================
+\begin{singlespace}
+\begin{center}
+{\large\bfseries Response to Reviewers' Comments}\\[0.5\baselineskip]
+{\normalsize\bfseries Manuscript ID 88}\\[0.25\baselineskip]
+{\normalsize ``Uncertainty-Aware Multimodal Deep Learning Framework for\\
+Stress Detection Using Audio-Visual Signals''}\\[0.5\baselineskip]
+{\normalsize Track: FMLDS2026}\\[0.75\baselineskip]
+{\normalsize Meruva Kodanda Suraj, Mamta Nag, and Mallikharjuna Rao K.}\\[0.25\baselineskip]
+{\normalsize International Institute of Information Technology, Naya Raipur}\\[0.25\baselineskip]
+{\normalsize Chhattisgarh, India}
+\end{center}
+\end{singlespace}
+
+\vspace{0.5\baselineskip}
+
+\begin{singlespace}
+\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{%
+\small\textbf{Note on presentation.}\enspace Reviewers' comments are
+reproduced verbatim as indented italic block quotations. {\color{changered}%
+Section headings and all descriptions of changes made to the manuscript
+are set in red}, so that the replies and the specific revisions can be
+located at a glance. References follow the numbered IEEE style used in
+the manuscript; see the note preceding the reference list.}}
+\end{singlespace}
+
+\vspace{0.5\baselineskip}
+
+%==============================================================
+%  Cover statement
+%==============================================================
+\section*{To the Program Chairs and Reviewers}
+\addcontentsline{toc}{section}{To the Program Chairs and Reviewers}
+
+We are grateful to both reviewers for the care and specificity of their
+reports. The comments identified genuine defects in the submitted
+manuscript---an unsubstantiated architectural claim, a numerical
+inconsistency between a table and a figure, several incomplete captions,
+and the omission of the experimental detail required for
+reproducibility---and correcting them has materially improved the paper.
+We have revised the manuscript throughout and respond to every point
+below.
+
+Reviewer 3's comments are addressed in the first section and Reviewer 5's
+in the second. Each comment is reproduced verbatim as a block quotation,
+followed by our response and a statement of the specific changes made to
+the manuscript. Section, table, and figure numbers refer to the revised
+manuscript unless stated otherwise. Where a reviewer's request could not
+be satisfied within the scope of a conference revision, we say so plainly
+rather than claim otherwise, and we describe the interim evidence we have
+supplied in its place.
+
+Before turning to the individual points, we summarize the five
+substantive changes that the revision makes. The last of these
+corrects a defect neither report named explicitly; it is set out in
+full in the section ``Additional Corrections Not Raised in the
+Reviews.''
+
+\begin{singlespace}
+\color{changered}
+\begin{enumerate}[leftmargin=*,itemsep=0.4\baselineskip]
+
+\item \textbf{The Action Unit gating claim has been withdrawn in full.}
+The component was not implemented in the evaluated model, and the claim
+should not have appeared in the submission. Every mention has been
+removed from the abstract, the introduction, the architecture
+description, and the contribution list, and Figure~1 has been redrawn so
+that the diagram matches the architecture actually evaluated.
+
+\item \textbf{The contradiction between the confusion matrix and the
+per-class report has been resolved.} The two class rows in the per-class
+table had been transposed. The confusion matrix was correct; the table
+was not. The table now reports the values that follow from the matrix.
+
+\item \textbf{A complete experimental configuration is now reported.}
+A new Table~I gives the dataset size, the split sizes and protocol, the
+optimizer, learning rate, batch size, schedule, epoch budget, dropout
+rate, number of Monte Carlo passes, temperature, precision, and random
+seed.
+
+\item \textbf{The accuracy of the proposed model is now reported with an
+interval, and the limits of the evidence are stated openly.} We report
+Wilson confidence intervals for the test accuracy, state that they
+overlap those of the CNN-LSTM baseline, disclose that the split is not
+actor-disjoint, and characterize the uncertainty AUROC of 0.6906 as a
+weak-to-moderate discriminator rather than a strength of the method.
+
+\item \textbf{Seven citations that resolved to the wrong references have
+been corrected.} In the submitted version, most of the citations in the
+Related Works section named works that were not the entries cited.
+Section~II has been rewritten, every citation has been verified against
+its entry, two entries have been replaced, and the bibliography has been
+reformatted into the numbered IEEE style.
+
+\end{enumerate}
+\end{singlespace}
+
+%==============================================================
+%  REVIEWER 3
+%==============================================================
+\section*{Response to Reviewer 3}
+\addcontentsline{toc}{section}{Response to Reviewer 3}
+
+We thank Reviewer 3 for a detailed and exacting report. The reviewer's
+overall assessment was Strong Reject, and we accept that the submitted
+version did not meet the standard of technical correctness the report
+demands. We have treated each of the ten points as a defect to be
+corrected rather than a matter for argument.
+
+%--------------------------------------------------------------
+\point{Comment 3.1 (Major). Action Unit gating is missing from the paper.}
+
+\begin{reviewercomment}
+In the abstract, AU gating is listed as a contribution criterion.
+However, Section III does not give any description, formula, or
+architectural detail. Please either provide a complete description,
+mathematical formulation, or remove it completely from all claims. As
+mentioned in the abstract, the contribution can't be verified.
+\end{reviewercomment}
+
+\response The reviewer is correct, and we accept the criticism without
+qualification. The Action Unit gating mechanism was not implemented in
+the model that produced the reported results. Its appearance in the
+abstract and introduction of the submitted manuscript was an error
+carried over from an earlier design of the architecture, and it described
+a component that no reported number depends on. Because the claim cannot
+be verified---as the reviewer observes---and because we do not have
+Facial Action Coding System~[1] annotations or an AU
+detector integrated into the present pipeline, we have taken the
+reviewer's second option and removed the claim entirely rather than
+retrofit a formulation after the fact.
+
+\begin{changesblock}
+Every reference to Action Unit gating has been deleted from the
+abstract, the introduction, the contribution list, and Section~III.
+The architecture is now described consistently as a hybrid of a 3D
+convolutional network, EfficientNet-B0~[2], an audio
+convolutional branch, and cross-modal attention fusion---the four
+components that are in fact implemented and evaluated. Figure~1 has been
+redrawn accordingly; see also our response to Comment~5.4. The
+contribution list in Section~I now names only cross-modal attention
+fusion, Monte Carlo Dropout and temperature scaling, the calibration and
+uncertainty evaluation, and selective prediction.
+\end{changesblock}
+
+%--------------------------------------------------------------
+\point{Comment 3.2 (Major). The proposed model underperforms the baseline model.}
+
+\begin{reviewercomment}
+UA-HybridNet (Acc: 0.813, AUC: 0.878) is outperformed by CNN-LSTM (Acc:
+0.885, AUC: 0.971) on every metric. The authors argue that uncertainty
+justifies this trade-off, which requires proof. Please show: (a) that the
+CNN-LSTM baseline is poorly calibrated (report its ECE/MCE), and (b) that
+applying temperature scaling to the CNN-LSTM does not close the
+calibration gap while retaining its higher accuracy. Without this, it is
+unclear why UA-HybridNet is preferable.
+\end{reviewercomment}
+
+\response This is the most consequential comment in either report, and we
+answer it directly. The reviewer has identified that our justification
+for the accuracy trade-off was asserted rather than demonstrated, and
+that the decisive experiment---calibrating the stronger baseline and
+seeing whether it then dominates on both axes---was not run. We agree
+that this experiment is the right test of our claim, and we agree that
+without it the preference for UA-HybridNet is not established. We are
+unable to report the paired ECE and MCE for a temperature-scaled CNN-LSTM
+within this revision cycle, because doing so properly requires refitting
+the baseline's temperature on a validation split under the same
+actor-disjoint protocol discussed in Comment~3.3, and reporting a
+hurried result would repeat the error the reviewer is objecting to.
+
+We have therefore withdrawn the unsupported claim rather than defend it,
+and have made three changes that we hope the reviewer will accept as an
+honest interim position. First, the manuscript no longer asserts that the
+uncertainty machinery justifies the accuracy gap; the claim is now
+confined to what the reported evidence supports, namely that temperature
+scaling reduces UA-HybridNet's own expected calibration error from 0.1768
+to 0.0710 and its maximum calibration error from 0.7651 to 0.2531
+(Table~IV), and that selective prediction converts uncertainty estimates
+into a measurable reduction in risk (Table~VI). Second, we now report
+that the accuracy difference is not statistically established on a test
+set of this size: the 95 percent Wilson interval~[3] for
+UA-HybridNet's accuracy is $[0.743, 0.868]$ against approximately
+$[0.826, 0.928]$ for the baseline, and these intervals overlap. Third, we
+state in Section~IV-D that fitting temperature scaling to the baseline's
+own logits and reporting its ECE and MCE alongside ours is the first of
+our planned extensions, and we identify it by name as the experiment
+needed to settle the comparison.
+
+We recognize that this is a weaker answer than the reviewer asked for. We
+judged it better to mark the claim as unproven and name the experiment
+that would prove it than to present an underpowered result as
+confirmation.
+
+\begin{changesblock}
+The discussion following Table~II has been rewritten to remove
+the claim that reliability compensates for the accuracy deficit.
+Section~IV-D now opens with the baseline calibration experiment as the
+first planned extension, stating that we will fit temperature scaling to
+the CNN-LSTM's logits and report its ECE and MCE alongside those in
+Table~IV ``rather than leaving the comparison one-sided.'' The Wilson
+intervals for both models are reported in the same subsection, with the
+baseline's success count inferred from its reported accuracy and recorded
+in a footnote.
+\end{changesblock}
+
+%--------------------------------------------------------------
+\point{Comment 3.3 (Major). Artificial actors in RAVDESS and lack of stress data.}
+
+\begin{reviewercomment}
+RAVDESS is a set of emotional data recorded by human actors, not actual
+stress data. Further, there are 24 actors who performed emotional
+expressions for the recordings, not acted on behalf of emotional data
+recording. Make sure your data is actor-disjoint such that no actor
+appears in both the training and test sets. Else, the model may learn
+speaker identity rather than stress.
+\end{reviewercomment}
+
+\response We accept both halves of this comment. On the first, RAVDESS
+consists of portrayed emotional expressions recorded by professional
+actors under controlled conditions~[4]; it is
+not a corpus of spontaneous physiological or psychological stress, and
+our mapping of anger, fear, and sadness to a ``stress'' class is a
+proxy, not a clinical label. The manuscript now says this in those terms.
+
+On the second, the reviewer's diagnosis is correct and we did not
+implement an actor-disjoint split. Our 70/15/15 partition was performed
+at the clip level by stratified random sampling, which means that clips
+from the same actor can appear in more than one split. The consequence
+the reviewer names---that the model may key on speaker identity rather
+than on stress-related expression---is a real threat to the validity of
+our accuracy figures, and we cannot rule it out from the experiments
+reported here. Re-running every model under a leave-actors-out protocol
+would change all reported numbers and is beyond what we can complete for
+this revision.
+
+Rather than leave this implicit, we have made the leakage risk explicit
+in three places in the manuscript so that no reader can mistake our
+results for subject-independent performance. We consider a leave-actors-out
+re-evaluation to be the second priority for the extended version of this
+work, after the baseline calibration experiment of Comment~3.2.
+
+\begin{changesblock}
+Section~IV-A now states that ``Partitioning was performed at the
+clip level by stratified random sampling, so clips from the same actor
+may span splits; the evaluation is thus not strictly subject-independent.''
+The Limitations subsection repeats the point and adds that a
+leave-actors-out protocol is planned. Section~IV-D names the
+re-evaluation as a planned extension whose purpose is ``to rule out
+speaker-identity leakage and confirm the reported accuracy holds for
+unseen speakers.'' The Limitations subsection also now states that
+RAVDESS ``includes performed emotional expressions rather than
+spontaneous real-world stress signals,'' which may affect applicability
+to real-world settings.
+\end{changesblock}
+
+%--------------------------------------------------------------
+\point{Comment 3.4 (Major). Too small a data size.}
+
+\begin{reviewercomment}
+The test set has only 150 samples (75 per class). At this scale, the
+confidence interval will be very large, which remains unreported in the
+paper. Minor variance in the test set might shift accuracy by several
+percentage points.
+\end{reviewercomment}
+
+\response We agree, and the reviewer's estimate of the effect is
+accurate. On 150 test samples the sampling error is large enough that
+differences of several percentage points carry little evidential weight,
+and the submitted manuscript reported point estimates as though they were
+precise. We have corrected this by reporting interval estimates.
+
+Using the Wilson score interval~[3], which is preferred over
+the normal approximation at this sample size, UA-HybridNet's accuracy of
+122/150 = 0.8133 has a 95 percent interval of $[0.743, 0.868]$, a width
+of roughly 12.5 percentage points. The corresponding interval for the
+CNN-LSTM baseline is approximately $[0.826, 0.928]$. As noted in our
+response to Comment~3.2, these intervals overlap, so the apparent
+ordering of the two models is not resolved by this test set. We now say
+so in the manuscript instead of comparing point estimates as if the gap
+were established.
+
+\begin{changesblock}
+Section~IV-D reports both Wilson intervals and states that the
+modest test set motivates expanding the evaluation set and running a
+paired McNemar test~[5] on matched predictions ``to confirm
+the accuracy gap against the baseline is real.'' The Limitations
+subsection notes that the dataset is modest relative to comparable
+deep learning corpora.
+\end{changesblock}
+
+%--------------------------------------------------------------
+\point{Comment 3.5 (Major). Missing experimental details.}
+
+\begin{reviewercomment}
+Please report the total dataset size, train size, validation size, test
+size, actor overlap policy, MC Dropout rate, number of training epochs,
+optimizer, learning rate, and batch size. The submitted paper is not
+reproducible.
+\end{reviewercomment}
+
+\response We accept this without reservation; the submitted version did
+not contain enough information to reproduce the results. Every item on
+the reviewer's list is now reported.
+
+\begin{changesblock}
+A new Section~IV-A (``Experimental Setup'') and an accompanying
+Table~I have been added. Table~I reports the total sample count (1000,
+balanced 500/500), the train, validation, and test sizes (700/150/150)
+under a 70/15/15 stratified split with seed 42, the optimizer (AdamW with
+weight decay $10^{-5}$), the learning rate ($10^{-4}$), the batch size (4,
+effective 16 through gradient accumulation), the schedule (cosine
+annealing), the epoch budget (maximum 100 with early-stopping patience
+20), the dropout rate (0.3), the number of Monte Carlo Dropout passes
+(20), the number of test-time augmentation copies (5), the fitted
+temperature ($T = 3.0855$), and the numerical precision (16-bit mixed).
+The actor overlap policy---clip-level stratified sampling, not
+actor-disjoint---is stated in the running text of Section~IV-A, as
+described under Comment~3.3. Section~III-B additionally now specifies the
+segmentation procedure that produces the 1000 samples: fixed-length
+two-second clips extracted with a 0.5-second sliding-window stride.
+\end{changesblock}
+
+%--------------------------------------------------------------
+\point{Comment 3.6 (Minor). Contradictory Table II caption.}
+
+\begin{reviewercomment}
+Table II caption states, ``the deterministic model gives calibrated
+confidence estimates'' --- this directly contradicts the paper's
+argument. Please correct it to ``the deterministic model does NOT give
+calibrated confidence estimates.'' Else, the claim contradicts the
+paper's claim.
+\end{reviewercomment}
+
+\response The reviewer is right; the sentence stated the opposite of what
+we meant and of what the Reliability column of the same table records.
+The negation was dropped in drafting. We have corrected it in the sense
+the reviewer indicates.
+
+\begin{changesblock}
+The passage now reads: ``the deterministic Hybrid model attains
+higher raw accuracy but gives no calibrated confidence estimates, which
+are necessary in safety-critical applications for reliable deployment.''
+This is consistent with the Reliability column of Table~II, which records
+``No'' for all three deterministic architectures and ``Yes'' only for the
+uncertainty-aware model.
+\end{changesblock}
+
+%--------------------------------------------------------------
+\point{Comment 3.7 (Minor). Incomplete Figure 2 caption.}
+
+\begin{reviewercomment}
+Figure 2 reads ``Confusion Matrix for .'' --- the model name is missing.
+Please complete this caption.
+\end{reviewercomment}
+
+\response Corrected. The caption had been left with an unfilled model
+name.
+
+\begin{changesblock}
+The caption of Figure~2 now reads ``Confusion Matrix for
+UA-HybridNet.'' We have also audited every other caption in the
+manuscript for the same class of omission; the per-class table
+(Table~III) is now captioned ``Per-Class Classification Report for
+UA-HybridNet,'' and the model is named consistently in all captions,
+table headings, and cross-references.
+\end{changesblock}
+
+%--------------------------------------------------------------
+\point{Comment 3.8 (Minor). Uncertainty AUROC barely above chance.}
+
+\begin{reviewercomment}
+The Uncertainty AUROC of 0.6906 is barely above chance (0.5). It suggests
+uncertainty estimation is a weak indicator of misclassification. Please
+discuss the result honestly.
+\end{reviewercomment}
+
+\response We agree with the reviewer's reading of the number and have
+adopted it in the manuscript. An AUROC of 0.6906 for separating correct
+from incorrect predictions by predictive uncertainty is a
+weak-to-moderate discriminator, and it does not support a strong claim
+that Monte Carlo Dropout reliably identifies the model's errors. The
+submitted version reported the value without comment, which invited a
+more favorable reading than it deserves.
+
+We note, without offering it as a defense, that the selective prediction
+results in Table~VI are consistent with a weak but non-zero signal:
+rejecting the 20 percent most uncertain samples raises accuracy from
+0.8133 to 0.8333 and AUC from 0.8782 to 0.8999, and raises stress recall
+from 0.8667 to 0.8871. These are modest gains, of the size one would
+expect from a modestly informative uncertainty estimate, and the
+manuscript now presents them as such. The natural inference is that the
+uncertainty signal itself needs to be improved rather than that the
+selective mechanism has been vindicated, and we say this explicitly.
+
+\begin{changesblock}
+Section~IV-D now states that ``the current Uncertainty AUROC of
+0.6906 is only a weak-to-moderate discriminator of misclassification''
+and identifies strengthening the uncertainty estimate as a planned
+extension, specifically by exploring deep ensembles~[6]
+and evidential deep learning~[7] as alternatives to Monte
+Carlo Dropout~[8]. The claims made for the
+uncertainty results elsewhere in Section~IV have been moderated to match.
+\end{changesblock}
+
+%--------------------------------------------------------------
+\point{Comment 3.9 (Minor). Standard equations.}
+
+\begin{reviewercomment}
+Equations 1--5 are standard from previous work. Please consider replacing
+those with your own mathematical formulation.
+\end{reviewercomment}
+
+\response We have partly followed this suggestion and should be candid
+about the extent. The underlying quantities---Monte Carlo Dropout
+statistics, predictive entropy and mutual information, the
+temperature-scaling objective, and the expected calibration error---are
+established results~[8]--[10], and we do not think it would be honest to present
+re-derivations of them as our own contribution. What we have done instead
+is rewrite the formal section so that the notation is our own and
+specific to this architecture, and so that each equation states something
+the reader needs in order to follow our system rather than reciting
+background.
+
+Concretely, the fusion stage is now given a compact operator definition,
+$\mathrm{CA}(Q,K) = \mathrm{LN}\!\left(Q + \mathrm{MHA}(Q,K,K)\right)$,
+which is applied in both directions to yield an audio-aware visual vector
+and a visual-aware audio vector, with the modality shapes
+($F_v \in \mathbb{R}^{L_v \times d}$, $F_a \in \mathbb{R}^{L_a \times d}$,
+and the pooled vectors $f_s, f_v, f_a \in \mathbb{R}^{d}$) defined
+explicitly. The temperature-scaling objective is stated as the negative
+log-likelihood minimization actually solved on our validation set, with
+our fitted value $T^{*} = 3.0855$ reported. The selective-prediction rule
+and the calibration error are combined into a single equation block that
+defines the abstention threshold $\eta_\alpha$ at coverage $1 - \alpha$
+alongside the ECE, because in our framework these two are used together.
+We believe this makes Section~III specific to the proposed system without
+claiming credit for standard results.
+
+\begin{changesblock}
+Section~III-D through III-F have been rewritten with consistent
+notation defined at the point of first use. The cross-modal attention
+operator, the shapes of all intermediate representations, the fitted
+temperature, and the combined selective-prediction and calibration block
+are new. Attribution to prior work is given inline for each standard
+quantity.
+\end{changesblock}
+
+%--------------------------------------------------------------
+\point{Comment 3.10 (Minor). Grammatical errors.}
+
+\begin{reviewercomment}
+Several grammatical errors reduce readability. The paper would benefit
+from careful proofreading.
+\end{reviewercomment}
+
+\response Accepted. The manuscript has been proofread in full. Reviewer 5
+identified one instance specifically (``competitive perform''), which is
+addressed under Comment~5.5.
+
+\begin{changesblock}
+The abstract has been rewritten, and the introduction,
+Section~III, and the results discussion have been substantially edited
+for grammar, article usage, subject-verb agreement, and consistency of
+terminology. The model name has been standardized as ``UA-HybridNet''
+throughout, having previously alternated between several informal
+designations.
+\end{changesblock}
+
+%==============================================================
+%  REVIEWER 5
+%==============================================================
+\section*{Response to Reviewer 5}
+\addcontentsline{toc}{section}{Response to Reviewer 5}
+
+We thank Reviewer 5 for a concise report that isolated a serious
+numerical error we had not detected. Comments 5.1 and 5.2 concern the
+same defect and are answered together.
+
+%--------------------------------------------------------------
+\point{Comments 5.1 and 5.2. Contradiction between the confusion matrix and the per-class report.}
+
+\begin{reviewercomment}
+There is a major mathematical contradiction between the confusion matrix
+in Figure 2 and the per-class classification report in Table III.
+
+The calculated recall for the stress class from the confusion matrix is
+approximately 86.7\%, but Table III lists it as 76.0\%. The calculated
+recall for the non-stress class from the confusion matrix is 76.0\%, but
+Table III lists it as 87.0\%
+\end{reviewercomment}
+
+\response The reviewer is correct in every particular, including the
+arithmetic. We are grateful for the catch. The cause was a transposition
+of the two class rows when the classification report was transcribed into
+Table~III: the values were individually right but assigned to the wrong
+classes, which inverted the interpretation of the model's behavior. The
+confusion matrix was correct; the table was not.
+
+The confusion matrix contains 57 true non-stress, 18 non-stress
+misclassified as stress, 10 stress misclassified as non-stress, and 65
+true stress, over 75 samples per class. This yields stress recall
+$65/75 = 0.8667$ and non-stress recall $57/75 = 0.7600$, exactly as the
+reviewer computed, together with stress precision $65/83 = 0.7831$ and
+non-stress precision $57/67 = 0.8507$. Table~III now reports these
+values. All four numbers are mutually consistent with the matrix, with
+the overall accuracy of $122/150 = 0.8133$ in Table~II, and with the
+0 percent rejection row of the selective-prediction table (Table~VI).
+
+The correction also changes what the paper says about the model, and we
+have updated the narrative accordingly. The submitted version, following
+the transposed table, described the model as more precise than sensitive
+on the stress class. The correct reading is the opposite and is more
+favorable to our stated motivation: the model is more sensitive than
+precise on stress, with recall 0.8667 against precision 0.7831, which is
+the error profile one wants in a monitoring application where a missed
+stress case is costlier than a false alarm. We now make this point using
+the corrected figures.
+
+\begin{changesblock}
+Table~III has been corrected: the Stress row now reads precision
+0.7831, recall 0.8667, F1 0.8228; the Non-Stress row reads precision
+0.8507, recall 0.7600, F1 0.8028. The macro and weighted averages
+(0.8169, 0.8133, 0.8128) are recomputed and, on a balanced test set,
+coincide. The accompanying text now states that ``the stress class
+achieves higher recall (0.8667), indicating strong sensitivity in
+detecting stress, while the non-stress class achieves higher precision
+(0.8507).'' The confusion matrix discussion states the correct totals
+(122 correct, 28 misclassified). We have verified every derived quantity
+in Section~IV against the confusion matrix counts.
+\end{changesblock}
+
+%--------------------------------------------------------------
+\point{Comment 5.3. Undefined ``Pipeline D'' and incomplete caption.}
+
+\begin{reviewercomment}
+Figure 2 contains the header ``Pipeline D Confusion Matrix,'' but the term
+``Pipeline D'' is never introduced or explained in the manuscript.Also the
+text caption is also incomplete
+\end{reviewercomment}
+
+\response Corrected. ``Pipeline D'' was internal shorthand from our
+experiment tracking---the fourth configuration in our ablation
+sequence---and it should never have reached the manuscript. It denotes
+the same model the paper calls UA-HybridNet.
+
+\begin{changesblock}
+Figure~2 has been regenerated without the embedded plot title,
+so the figure no longer carries the ``Pipeline D'' header. The caption is
+now complete and reads ``Confusion Matrix for UA-HybridNet.'' We have
+searched the manuscript for other internal designations of this kind;
+Table~III, which was similarly affected, is now captioned ``Per-Class
+Classification Report for UA-HybridNet.'' The name ``UA-HybridNet'' is
+used consistently in all text, captions, and figures. This point overlaps
+with Reviewer 3's Comment~3.7, and the two were corrected together.
+\end{changesblock}
+
+%--------------------------------------------------------------
+\point{Comment 5.4. Action Unit gating absent from Figure 1.}
+
+\begin{reviewercomment}
+The abstract and introduction highlight an Action Unit gating system as a
+core part of the hybrid architecture, but this component is completely
+missing from the system workflow diagram in Figure 1.
+\end{reviewercomment}
+
+\response The reviewer has identified the same inconsistency as
+Reviewer 3's Comment~3.1, and from the opposite direction: the diagram
+was right and the text was wrong. Action Unit gating was absent from
+Figure~1 because it was absent from the implemented system. We have
+resolved the inconsistency by removing the claim from the text rather
+than by adding a component to the diagram.
+
+\begin{changesblock}
+All references to Action Unit gating have been removed from the
+abstract, introduction, contribution list, and Section~III. Figure~1 has
+been redrawn and now shows exactly the evaluated pipeline: the RAVDESS
+source, the parallel video and audio preprocessing paths (frame
+extraction, face detection, resize and normalize; audio signal, Mel
+spectrogram, normalization), the three feature branches (3D-CNN,
+EfficientNet-B0, audio CNN), cross-modal attention, multimodal feature
+fusion, the fully connected layer, and the binary stress/non-stress
+output. Figure~1, Section~III, and the abstract now describe the same
+architecture, and no component appears in one but not the others.
+\end{changesblock}
+
+%--------------------------------------------------------------
+\point{Comment 5.5. Typographical and grammatical errors in the abstract.}
+
+\begin{reviewercomment}
+The abstract contains noticeable typographical and grammatical errors,
+such as using the phrase ``competitive perform'' instead of ``competitive
+performance''.
+\end{reviewercomment}
+
+\response Corrected, and the abstract has been rewritten in full rather
+than patched. As noted under Comment~3.10, the remainder of the
+manuscript has been proofread as well.
+
+\begin{changesblock}
+The specific phrase the reviewer cites now reads ``a
+competitive performance of 81.3\% accuracy and an AUC of 0.878.'' The
+rewritten abstract also removes the withdrawn Action Unit gating claim
+(Comment~5.4) and states the contribution in terms of the components
+actually evaluated.
+\end{changesblock}
+
+%==============================================================
+%  ADDITIONAL CORRECTIONS
+%==============================================================
+\section*{Additional Corrections Not Raised in the Reviews}
+\addcontentsline{toc}{section}{Additional Corrections Not Raised in the Reviews}
+
+In auditing the manuscript against both reports we found a defect that
+neither reviewer named explicitly, but which we believe contributed to
+the rating both gave to the reference list. We report and correct it here
+rather than leave it to be discovered later.
+
+%--------------------------------------------------------------
+\point{Additional Correction A.1. Citations in Section II did not resolve to the works discussed.}
+
+\begin{reviewercomment}
+5. The references are sufficient and up-to-date
+
+Moderate \quad (Reviewer 3 and Reviewer 5)
+\end{reviewercomment}
+
+\response On re-checking every citation in the submitted version against
+its bibliography entry, we found that seven of the eleven citations in
+the Related Works section pointed to entries that had nothing to do with
+the work being described. The text discussed studies by Nijhawan et al.,
+Rastogi et al., Bobade et al., Zhu et al., Moosavi et al., Saylam et al.,
+and Sharma et al.\ on social-media and wearable stress detection, but the
+corresponding bibliography positions held, respectively, Livingstone and
+Russo (RAVDESS), Tan and Le (EfficientNet), Gal and Ghahramani (Monte
+Carlo Dropout), Guo et al.\ (calibration), Lakshminarayanan et al.\ (deep
+ensembles), Geifman and El-Yaniv (selective classification), and Kendall
+and Gal (uncertainty types). Only the first four citations in the section
+resolved correctly.
+
+The effect was that the submitted manuscript discussed seven papers that
+did not appear in its bibliography at all, while its bibliography listed
+seven papers the text never discussed. This is a serious error. It
+misattributes published work, and any reviewer who checked one of those
+citations would reasonably have concluded that the related-work
+discussion was unreliable. We apologize for it. The cause was a
+wholesale replacement of the Related Works narrative late in preparation
+without a corresponding update to the bibliography, and we did not
+re-verify the citations afterwards.
+
+We have since checked all fifteen citations in the revised manuscript
+individually against their entries, and every one resolves to the work
+named in the text.
+
+\begin{changesblock}
+Section~II has been rewritten so that each cited work is the
+work actually discussed, and all fifteen citations have been verified
+individually against the bibliography. Two entries that the revised text
+no longer discusses have been removed: Awada et al.\ (\emph{IEEE
+Transactions on Affective Computing}, 2023) and Hochreiter and
+Schmidhuber (\emph{Neural Computation}, 1997). Two entries have been
+added to support the revised discussion: Mentis, Lee, and Roussos
+(\emph{Molecular Psychiatry}, 2024) on deep learning for mental health
+monitoring, and Nag, Vijaya, and Rao (AICCONF, 2025) on optimization for
+occupational stress prediction. The bibliography remains at fifteen
+entries. Separately, all entries have been reformatted from the
+author-prominent style used in the submission into the numbered IEEE
+style required by the proceedings, with initials preceding surnames and
+volume, number, page, and year fields given explicitly.
+\end{changesblock}
+
+%==============================================================
+%  Closing
+%==============================================================
+\section*{Concluding Remarks}
+\addcontentsline{toc}{section}{Concluding Remarks}
+
+We have accepted every correction the reviewers identified. The
+unverifiable architectural claim is withdrawn, the numerical
+contradiction between Table~III and Figure~2 is resolved in favor of the
+confusion matrix, the incomplete captions and the internal ``Pipeline D''
+designation are removed, and a full experimental configuration is now
+reported in Table~I. We have additionally corrected, and disclosed
+above, a citation defect that neither report named: seven references in
+Section~II of the submitted version did not resolve to the works the
+text discussed.
+
+Two of Reviewer 3's requests---the calibration comparison against a
+temperature-scaled CNN-LSTM baseline (Comment~3.2) and the
+actor-disjoint re-evaluation (Comment~3.3)---are not satisfied by new
+experiments in this revision. We have not papered over this. In both
+cases we have removed the claims that depended on the missing evidence,
+stated the limitation in the body of the paper rather than only in a
+closing paragraph, and named the specific experiment required to settle
+the question. On the related question of statistical power
+(Comment~3.4), we now report Wilson intervals that overlap between the
+proposed model and the baseline, and we say in the manuscript that the
+accuracy ordering is therefore not established by this test set.
+
+We hope the reviewers find that the revised manuscript is internally
+consistent, reproducible from the reported configuration, and candid
+about the boundary between what the experiments demonstrate and what
+remains to be shown. We are grateful for the reviews, which were
+unusually specific and correspondingly useful.
+
+%==============================================================
+%  References (Chicago author-date)
+%==============================================================
+\section*{References}
+\addcontentsline{toc}{section}{References}
+
+\begin{singlespace}
+\noindent\small Reference numbers below are local to this letter and are
+assigned in order of first citation; they do not correspond to the
+numbering of the manuscript's own bibliography. Entries~[2], [4], [6],
+and [8]--[10] also appear in the manuscript and are reproduced from it
+verbatim. Entries~[1], [3], [5], and [7] are cited only in this letter.
+\end{singlespace}
+
+\vspace{0.5\baselineskip}
+
+\begin{ieeerefs}
+
+\item
+P. Ekman and W. V. Friesen,
+\emph{Facial Action Coding System: A Technique for the Measurement of Facial Movement}.
+Palo Alto, CA: Consulting Psychologists Press, 1978.
+
+\item
+M. Tan and Q. V. Le,
+``EfficientNet: Rethinking model scaling for convolutional neural networks,''
+Proc. International Conference on Machine Learning (ICML), 2019.
+
+\item
+E. B. Wilson,
+``Probable inference, the law of succession, and statistical inference,''
+Journal of the American Statistical Association, vol. 22, no. 158, pp. 209--212, 1927.
+
+\item
+S. R. Livingstone and F. A. Russo,
+``The Ryerson Audio-Visual Database of Emotional Speech and Song (RAVDESS): A dynamic multimodal database of emotional expressions,''
+PLoS ONE, vol. 13, no. 5, 2018.
+
+\item
+Q. McNemar,
+``Note on the sampling error of the difference between correlated proportions or percentages,''
+Psychometrika, vol. 12, no. 2, pp. 153--157, 1947.
+
+\item
+B. Lakshminarayanan, A. Pritzel, and C. Blundell,
+``Simple and scalable predictive uncertainty estimation using deep ensembles,''
+Advances in Neural Information Processing Systems (NeurIPS), 2017.
+
+\item
+M. Sensoy, L. Kaplan, and M. Kandemir,
+``Evidential deep learning to quantify classification uncertainty,''
+Advances in Neural Information Processing Systems (NeurIPS), 2018.
+
+\item
+Y. Gal and Z. Ghahramani,
+``Dropout as a Bayesian approximation: Representing model uncertainty in deep learning,''
+Proc. International Conference on Machine Learning (ICML), 2016.
+
+\item
+C. Guo, G. Pleiss, Y. Sun, and K. Q. Weinberger,
+``On calibration of modern neural networks,''
+Proc. International Conference on Machine Learning (ICML), 2017.
+
+\item
+A. Kendall and Y. Gal,
+``What uncertainties do we need in Bayesian deep learning for computer vision?''
+Advances in Neural Information Processing Systems (NeurIPS), 2017.
+
+\end{ieeerefs}
+
+\end{document}

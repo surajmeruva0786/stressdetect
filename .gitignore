@@ -5,3 +5,7 @@
 !preprocess_data.py
 !train_baseline_model.py
 !.gitignore
+# The manuscript, figures and reviewer correspondence.
+# Datasets and model checkpoints stay excluded by the "*" rule above.
+!paper/
+!paper/**

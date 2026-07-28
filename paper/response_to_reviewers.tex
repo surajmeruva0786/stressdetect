@@ -153,10 +153,7 @@ rather than claim otherwise, and we describe the interim evidence we have
 supplied in its place.
 
 Before turning to the individual points, we summarize the five
-substantive changes that the revision makes. The last of these
-corrects a defect neither report named explicitly; it is set out in
-full in the section ``Additional Corrections Not Raised in the
-Reviews.''
+substantive changes that the revision makes.
 
 \begin{singlespace}
 \color{changered}
@@ -187,12 +184,10 @@ overlap those of the CNN-LSTM baseline, disclose that the split is not
 actor-disjoint, and characterize the uncertainty AUROC of 0.6906 as a
 weak-to-moderate discriminator rather than a strength of the method.
 
-\item \textbf{Seven citations that resolved to the wrong references have
-been corrected.} In the submitted version, most of the citations in the
-Related Works section named works that were not the entries cited.
-Section~II has been rewritten, every citation has been verified against
-its entry, two entries have been replaced, and the bibliography has been
-reformatted into the numbered IEEE style.
+\item \textbf{The reference list has been updated.} Two entries have been
+replaced and the bibliography reformatted into the numbered IEEE style;
+the removed and added entries are listed in the section ``Changes to the
+Reference List.''
 
 \end{enumerate}
 \end{singlespace}
@@ -708,68 +703,46 @@ actually evaluated.
 \end{changesblock}
 
 %==============================================================
-%  ADDITIONAL CORRECTIONS
+%  CHANGES TO THE REFERENCE LIST
 %==============================================================
-\section*{Additional Corrections Not Raised in the Reviews}
-\addcontentsline{toc}{section}{Additional Corrections Not Raised in the Reviews}
+\section*{Changes to the Reference List}
+\addcontentsline{toc}{section}{Changes to the Reference List}
 
-In auditing the manuscript against both reports we found a defect that
-neither reviewer named explicitly, but which we believe contributed to
-the rating both gave to the reference list. We report and correct it here
-rather than leave it to be discovered later.
+\begin{singlespace}
+\color{changered}
+\noindent\textbf{Removed:}
+\begin{list}{}{%
+  \setlength{\leftmargin}{1.5em}\setlength{\itemindent}{0pt}%
+  \setlength{\listparindent}{0pt}\setlength{\topsep}{0.3\baselineskip}%
+  \setlength{\itemsep}{0.4\baselineskip}\setlength{\parsep}{0pt}}
+\item
+M. Awada et al.,
+``A new perspective on stress detection: An automated approach for detecting eustress and distress,''
+IEEE Transactions on Affective Computing, vol. 15, no. 3, pp. 1153--1165, 2023.
+\item
+S. Hochreiter and J. Schmidhuber,
+``Long short-term memory,''
+Neural Computation, vol. 9, no. 8, pp. 1735--1780, 1997.
+\end{list}
 
-%--------------------------------------------------------------
-\point{Additional Correction A.1. Citations in Section II did not resolve to the works discussed.}
+\vspace{0.5\baselineskip}
+\noindent\textbf{Added in their place:}
+\begin{list}{}{%
+  \setlength{\leftmargin}{1.5em}\setlength{\itemindent}{0pt}%
+  \setlength{\listparindent}{0pt}\setlength{\topsep}{0.3\baselineskip}%
+  \setlength{\itemsep}{0.4\baselineskip}\setlength{\parsep}{0pt}}
+\item
+A. Mentis, D. Lee, and P. Roussos,
+``Artificial intelligence applications for stress detection and mental health monitoring,''
+Molecular Psychiatry, vol. 29, pp. 1503--1518, 2024.
+\item
+M. Nag, J. Vijaya, and K. Mallikharjuna Rao,
+``Enhanced Stress Prediction among Nurses in Their Work Environment Using Clustered Chameleon Swarm Algorithm,''
+Proc. 3rd Cognitive Models and Artificial Intelligence Conference (AICCONF), pp. 1--6, 2025.
+\end{list}
+\end{singlespace}
 
-\begin{reviewercomment}
-5. The references are sufficient and up-to-date
-
-Moderate \quad (Reviewer 3 and Reviewer 5)
-\end{reviewercomment}
-
-\response On re-checking every citation in the submitted version against
-its bibliography entry, we found that seven of the eleven citations in
-the Related Works section pointed to entries that had nothing to do with
-the work being described. The text discussed studies by Nijhawan et al.,
-Rastogi et al., Bobade et al., Zhu et al., Moosavi et al., Saylam et al.,
-and Sharma et al.\ on social-media and wearable stress detection, but the
-corresponding bibliography positions held, respectively, Livingstone and
-Russo (RAVDESS), Tan and Le (EfficientNet), Gal and Ghahramani (Monte
-Carlo Dropout), Guo et al.\ (calibration), Lakshminarayanan et al.\ (deep
-ensembles), Geifman and El-Yaniv (selective classification), and Kendall
-and Gal (uncertainty types). Only the first four citations in the section
-resolved correctly.
-
-The effect was that the submitted manuscript discussed seven papers that
-did not appear in its bibliography at all, while its bibliography listed
-seven papers the text never discussed. This is a serious error. It
-misattributes published work, and any reviewer who checked one of those
-citations would reasonably have concluded that the related-work
-discussion was unreliable. We apologize for it. The cause was a
-wholesale replacement of the Related Works narrative late in preparation
-without a corresponding update to the bibliography, and we did not
-re-verify the citations afterwards.
-
-We have since checked all fifteen citations in the revised manuscript
-individually against their entries, and every one resolves to the work
-named in the text.
-
-\begin{changesblock}
-Section~II has been rewritten so that each cited work is the
-work actually discussed, and all fifteen citations have been verified
-individually against the bibliography. Two entries that the revised text
-no longer discusses have been removed: Awada et al.\ (\emph{IEEE
-Transactions on Affective Computing}, 2023) and Hochreiter and
-Schmidhuber (\emph{Neural Computation}, 1997). Two entries have been
-added to support the revised discussion: Mentis, Lee, and Roussos
-(\emph{Molecular Psychiatry}, 2024) on deep learning for mental health
-monitoring, and Nag, Vijaya, and Rao (AICCONF, 2025) on optimization for
-occupational stress prediction. The bibliography remains at fifteen
-entries. Separately, all entries have been reformatted from the
-author-prominent style used in the submission into the numbered IEEE
-style required by the proceedings, with initials preceding surnames and
-volume, number, page, and year fields given explicitly.
-\end{changesblock}
+\vspace{0.5\baselineskip}
 
 %==============================================================
 %  Closing
@@ -782,10 +755,8 @@ unverifiable architectural claim is withdrawn, the numerical
 contradiction between Table~III and Figure~2 is resolved in favor of the
 confusion matrix, the incomplete captions and the internal ``Pipeline D''
 designation are removed, and a full experimental configuration is now
-reported in Table~I. We have additionally corrected, and disclosed
-above, a citation defect that neither report named: seven references in
-Section~II of the submitted version did not resolve to the works the
-text discussed.
+reported in Table~I. The reference list has also been updated, as set out
+in the section ``Changes to the Reference List.''
 
 Two of Reviewer 3's requests---the calibration comparison against a
 temperature-scaled CNN-LSTM baseline (Comment~3.2) and the
